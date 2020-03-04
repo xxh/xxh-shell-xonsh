@@ -33,11 +33,11 @@ aliases['xpip'] = _xxh_pip
 del _xxh_pip
 
 for plugin_path in sorted(($XXH_HOME / 'plugins').glob('*xonsh*')):
-    if (plugin_path / 'xonshrc.xsh').exists():
+    if (plugin_path / 'pluginrc.xsh').exists():
         cd @(plugin_path)
         sys_path = sys.path
-        sys.path = [str(plugin_path)]
-        __import__('xonshrc')
-        del sys.modules['xonshrc']
+        sys.path += [str(plugin_path)]
+        __import__('pluginrc')
+        del sys.modules['pluginrc']
         sys.path = sys_path
 cd
