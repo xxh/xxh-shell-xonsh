@@ -15,6 +15,7 @@ rm -rf @(build_dir)/
 mkdir -p @(build_dir)
 
 cp @(script_dir / 'entrypoint.sh') @(build_dir)/
+cp @(script_dir / 'xonshrc.xsh') @(build_dir)/
 
 cd @(build_dir)
 if not p'xonsh'.is_file():
