@@ -4,7 +4,7 @@ Python-powered [xonsh shell](https://xon.sh) entrypoint for [xxh](https://github
 
 **xxh plugin** is the set of xsh scripts which will be run when you'll use xxh. You can create xxh plugin with your lovely aliases, tools or color theme and xxh will bring them to your ssh sessions.
 
-🔎 [Search xxh plugins on Github](https://github.com/search?q=xxh-plugin&type=Repositories) or [Bitbucket](https://bitbucket.org/repo/all?name=xxh-plugin) or 💡 [Create xxh plugin](https://github.com/xxh/xxh-plugin-xonsh-sample)
+🔎 [Search xxh plugins on Github](https://github.com/search?q=xxh-plugin-xonsh&type=Repositories) or [Bitbucket](https://bitbucket.org/repo/all?name=xxh-plugin-xonsh) or 💡 [Create xxh plugin](https://github.com/xxh/xxh-plugin-xonsh-sample)
 
 Pinned xxh xonsh plugins:
 
