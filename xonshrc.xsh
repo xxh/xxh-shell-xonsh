@@ -32,7 +32,7 @@ def _xxh_pip(args): # https://github.com/xonsh/xonsh/issues/3463
 aliases['xpip'] = _xxh_pip
 del _xxh_pip
 
-for plugin_path in sorted(($XXH_HOME / 'plugins').glob('*')):
+for plugin_path in sorted(($XXH_HOME / 'plugins').glob('*xonsh*')):
     if (plugin_path / 'xonshrc.xsh').exists():
         cd @(plugin_path)
         sys_path = sys.path
