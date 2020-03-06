@@ -2,7 +2,7 @@ Python-powered [xonsh shell](https://xon.sh) entrypoint for [xxh](https://github
 
 ## Plugins
 
-**xxh plugin** is the set of xsh scripts which will be run when you'll use xxh. You can create xxh plugin with your lovely aliases, tools or color theme and xxh will bring them to your ssh sessions.
+**xonsh xxh plugin** is the set of xsh scripts which will be run when you'll use xxh. You can create xxh plugin with your lovely aliases, tools or color theme and xxh will bring them to your ssh sessions.
 
 🔎 [Search xxh plugins on Github](https://github.com/search?q=xxh-plugin-xonsh&type=Repositories) or [Bitbucket](https://bitbucket.org/repo/all?name=xxh-plugin-xonsh) or 💡 [Create xxh plugin](https://github.com/xxh/xxh-plugin-xonsh-sample)
 
@@ -21,3 +21,4 @@ To install [xontribs](https://xon.sh/xontribs.html) in xxh session use `xpip ins
 * @probonopd for https://github.com/AppImage
 * @niess for https://github.com/niess/linuxdeploy-plugin-python/
 * @gforsyth for https://github.com/xonsh/xonsh/issues/3374
+ 
