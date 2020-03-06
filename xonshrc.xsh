@@ -3,7 +3,7 @@ import sys, argparse
 del $LS_COLORS # https://github.com/xonsh/xonsh/issues/3055
 
 $UPDATE_OS_ENVIRON=True
-$XXH_HOME = pf"{__file__}".absolute().parent
+$XXH_HOME = pf"{__file__}".absolute().parent.parent.parent.parent.parent
 
 $PIP_TARGET = $XXH_HOME / 'pip'
 $PIP_XONTRIB_TARGET = $PIP_TARGET / 'xontrib'
@@ -32,7 +32,7 @@ def _xxh_pip(args): # https://github.com/xonsh/xonsh/issues/3463
 aliases['xpip'] = _xxh_pip
 del _xxh_pip
 
-for plugin_path in sorted(($XXH_HOME / 'plugins').glob('*xonsh*')):
+for plugin_path in sorted(($XXH_HOME / 'xxh/plugins').glob('*xonsh*')):
     if (plugin_path / 'pluginrc.xsh').exists():
         cd @(plugin_path)
         sys_path = sys.path
