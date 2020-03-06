@@ -6,7 +6,7 @@ case "${option}"
 in
 f) EXECUTE_FILE=${OPTARG};;
 # c) EXECUTE_COMMAND=${OPTARG};;  # https://github.com/xonssh/xxh/issues/36
-f) VERBOSE=${OPTARG};;  # TODO: verbose mode
+v) VERBOSE=${OPTARG};;  # TODO: verbose mode
 esac
 done
 
