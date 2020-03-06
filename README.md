@@ -1,5 +1,18 @@
 Python-powered [xonsh shell](https://xon.sh) entrypoint for [xxh](https://github.com/xxh/xxh).
 
+## Install
+
+The xxh-shell-xonsh-appimage is supported by default when you're using xxh. 
+It will be installed during first connection. 
+
+You could install and try it it manually:
+```
+cd ~/.xxh/xxh/shells/
+git clone https://github.com/xxh/xxh-shell-xonsh-appimage
+xonsh xxh-shell-xonsh-appimage/build.xsh
+xxh myhost +s xxh-shell-xonsh-appimage
+```
+
 ## Plugins
 
 **xonsh xxh plugin** is the set of xsh scripts which will be run when you'll use xxh. You can create xxh plugin with your lovely aliases, tools or color theme and xxh will bring them to your ssh sessions.
