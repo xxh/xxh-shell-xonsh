@@ -30,8 +30,5 @@ The xxh is using pip and python from `xonsh.AppImage` by default. You can update
 To install [xontribs](https://xon.sh/xontribs.html) in xxh session use `xpip install <package>`. Never use `pip` to install xontribs ([details](https://github.com/xonsh/xonsh/issues/3463)).
 
 ## Thanks
-* @scopatz for https://github.com/xonsh/xonsh
 * @probonopd for https://github.com/AppImage
-* @niess for https://github.com/niess/linuxdeploy-plugin-python/
-* @gforsyth for https://github.com/xonsh/xonsh/issues/3374
- 
+* @niess for https://github.com/niess/linuxdeploy-plugin-python/ 
