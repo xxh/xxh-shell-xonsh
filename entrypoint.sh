@@ -16,9 +16,9 @@ CURRENT_DIR="$(cd "$(dirname "$0")" && pwd)"
 cd $CURRENT_DIR
 
 # Check FUSE support
-check_result=`./xonsh --no-script-cache -i --rc xonshrc.xsh -- settings.py 2>&1`
+check_result=`./xonsh --no-script-cache -i --rc xonshrc.xsh -- $CURRENT_DIR/../../../package/settings.py 2>&1`
 if [[ ! -f xonsh-check-done ]]; then
-  if [[ $check_result == *"AppImages require FUSE"* ]]; then
+  if [[ $check_result == *"FUSE"* ]]; then
     #echo "Extract AppImage" 1>&2  # TODO: verbose mode
     ./xonsh --appimage-extract > /dev/null # TODO: verbose mode
     mv squashfs-root xonsh-squashfs
