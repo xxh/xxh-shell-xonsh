@@ -4,7 +4,7 @@ import sys
 from sys import exit
 from shutil import which
 
-url_appimage = 'https://github.com/niess/linuxdeploy-plugin-python/releases/download/continuous/xonsh-x86_64.AppImage'
+url_appimage = 'https://github.com/xxh/linuxdeploy-plugin-python/releases/download/continuous/xonsh-release-x86_64.AppImage'
 
 def eprint(*args, **kwargs):
     print(*args, file=sys.stderr, **kwargs)
