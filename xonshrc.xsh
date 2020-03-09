@@ -32,6 +32,9 @@ def _xxh_pip(args): # https://github.com/xonsh/xonsh/issues/3463
 aliases['xpip'] = _xxh_pip
 del _xxh_pip
 
+if 'APPDIR' in ${...}:
+    aliases['xonsh'] = [$APPDIR+'/AppRun']
+
 for plugin_path in sorted(($XXH_HOME / 'xxh/plugins').glob('*xonsh*')):
     if (plugin_path / 'build/pluginrc.xsh').exists():
         plugin_path = plugin_path / 'build'
