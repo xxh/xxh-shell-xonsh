@@ -5,10 +5,20 @@ do
 case "${option}"
 in
 f) EXECUTE_FILE=${OPTARG};;
-# c) EXECUTE_COMMAND=${OPTARG};;  # https://github.com/xonssh/xxh/issues/36
-v) VERBOSE=${OPTARG};;  # TODO: verbose mode
+c) EXECUTE_COMMAND=${OPTARG};;
+v) VERBOSE=${OPTARG};;
 esac
 done
+
+if [[ $EXECUTE_COMMAND ]]; then
+  echo 'Xonsh entrypoint is not support command execution.'
+  echo 'Wait for xonsh release with fix: https://github.com/xonssh/xxh/issues/36'
+  exit 1
+fi
+
+if [[ $VERBOSE != '' ]]; then
+  export XXH_VERBOSE=$VERBOSE
+fi
 
 EXECUTE_FILE=`[ $EXECUTE_FILE ] && echo -n "-- $EXECUTE_FILE" || echo -n ""`
 
