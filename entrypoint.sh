@@ -40,7 +40,7 @@ cd $CURRENT_DIR
 
 # Check FUSE support
 check_result=`./xonsh --no-script-cache -i --rc xonshrc.xsh -- $CURRENT_DIR/../../../package/settings.py 2>&1`
-if [[ ! -f xonsh-check-done ]]; then
+if [[ ! -f .entrypoint-check-done ]]; then
   if [[ $check_result == *"FUSE"* ]]; then
     #echo "Extract AppImage" 1>&2  # TODO: verbose mode
     ./xonsh --appimage-extract > /dev/null # TODO: verbose mode
@@ -48,7 +48,10 @@ if [[ ! -f xonsh-check-done ]]; then
     mv xonsh xonsh-disabled
     ln -s ./xonsh-squashfs/usr/bin/python3 xonsh
   fi
-  echo $check_result > xonsh-check-done
+  echo $check_result > .entrypoint-check-done
 fi
+
+export XXH_HOME=`realpath $CURRENT_DIR/../../../..`
+export XONSH_HISTORY_FILE=$XXH_HOME/.xonsh_history
 
 ./xonsh --no-script-cache -i --rc xonshrc.xsh $EXECUTE_FILE
