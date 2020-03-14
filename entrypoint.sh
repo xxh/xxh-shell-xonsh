@@ -29,7 +29,7 @@ done
 
 if [[ $EXECUTE_COMMAND ]]; then
   echo 'Xonsh entrypoint is not support command execution.'
-  echo 'Wait for xonsh release with fix: https://github.com/xonssh/xxh/issues/36'
+  echo 'Wait for xonsh release with fix: https://github.com/xxh/xxh/issues/36'
   exit 1
 fi
 
