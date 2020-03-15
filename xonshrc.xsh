@@ -1,6 +1,9 @@
 import sys, argparse
+from base64 import b64decode
 
 del $LS_COLORS # https://github.com/xonsh/xonsh/issues/3055
+
+$XXH_VERBOSE = $XXH_VERBOSE if 'XXH_VERBOSE' in ${...} else False
 
 $UPDATE_OS_ENVIRON=True
 $XXH_HOME = pf"{__file__}".absolute().parent.parent.parent.parent.parent
@@ -34,6 +37,14 @@ del _xxh_pip
 
 if 'APPDIR' in ${...}:
     aliases['xonsh'] = [$APPDIR+'/AppRun']
+
+prefix_exe = 'XXH_SHELL_XONSH_APPIMAGE_EXE'
+for e in ${...}:
+    if e.startswith(prefix_exe):
+        code = b64decode(${e})
+        if $XXH_VERBOSE:
+            print(f'Execute {repr(code)}')
+        exec(code)
 
 for plugin_path in sorted(($XXH_HOME / 'xxh/plugins').glob('*xonsh*')):
     if (plugin_path / 'build/pluginrc.xsh').exists():
