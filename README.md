@@ -31,6 +31,11 @@ Pinned xxh xonsh plugins: [pipe-liner](https://github.com/xxh/xxh-plugin-xonsh-p
 
 🔎 [Search xxh plugins on Github](https://github.com/search?q=xxh-plugin-xonsh&type=Repositories) or [Bitbucket](https://bitbucket.org/repo/all?name=xxh-plugin-xonsh) or 💡 [Create xxh plugin](https://github.com/xxh/xxh-plugin-xonsh-sample)
 
+## Seamless mode
+Add environment variables to `env` file and bring them to the host using `source` command:
+```shell script
+source xxh.xsh myhost
+```
   
 ## Thanks
 * @probonopd for https://github.com/AppImage
