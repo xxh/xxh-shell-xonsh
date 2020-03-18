@@ -10,7 +10,7 @@ Install from any repo:
 ```
 cd ~/.xxh/xxh/plugins \
     && git clone --depth 1 https://github.com/xxh/xxh-shell-xonsh-appimage \
-    && ./xxh-shell-xonsh-appimage/build.xsh
+    && ./xxh-shell-xonsh-appimage/build.sh
 ```
 Connect:
 ``` 
