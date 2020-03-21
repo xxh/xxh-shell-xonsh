@@ -14,7 +14,7 @@ if not $PIP_XONTRIB_TARGET.exists():
     mkdir -p @($PIP_XONTRIB_TARGET)
 
 $PYTHONPATH = $PIP_TARGET
-$PATH = [ p"$PYTHONHOME" / 'bin', $XXH_HOME ] + $PATH
+$PATH = [$PIP_TARGET/'bin', p"$PYTHONHOME"/'bin', $XXH_HOME ] + $PATH
 sys.path.append(str($PIP_TARGET))
 sys.path.remove('') if '' in sys.path else None
 aliases['pip'] = ['python','-m','pip']
