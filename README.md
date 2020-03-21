@@ -4,7 +4,7 @@ Python-powered [xonsh shell](https://xon.sh) entrypoint for [xxh](https://github
 
 Install from xxh repo:
 ```
-xxhp i xxh-shell-xonsh-appimage
+xxh +I xxh-shell-xonsh-appimage
 ```
 Install from any repo:
 ```

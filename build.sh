@@ -3,11 +3,11 @@
 CDIR="$(cd "$(dirname "$0")" && pwd)"
 build_dir=$CDIR/build
 
-while getopts q: option
+while getopts q option
 do
   case "${option}"
   in
-    q) QUIET=${OPTARG};;
+    q) QUIET=1;;
   esac
 done
 
