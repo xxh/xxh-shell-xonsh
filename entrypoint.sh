@@ -1,11 +1,12 @@
 #!/bin/bash
 
-while getopts f:c:v:e:b: option
+while getopts f:c:C:v:e:b: option
 do
 case "${option}"
 in
 f) EXECUTE_FILE=${OPTARG};;
 c) EXECUTE_COMMAND=${OPTARG};;
+C) EXECUTE_COMMAND_B64=${OPTARG};;
 v) VERBOSE=${OPTARG};;
 e) ENV+=("$OPTARG");;
 b) EBASH+=("$OPTARG");;
@@ -38,9 +39,21 @@ for eb in "${EBASH[@]}"; do
 done
 
 if [[ $EXECUTE_COMMAND ]]; then
-  echo 'Xonsh entrypoint is not support command execution.'
-  echo 'Wait for xonsh release with fix: https://github.com/xxh/xxh/issues/36'
-  exit 1
+  if [[ $XXH_VERBOSE == '1' || $XXH_VERBOSE == '2' ]]; then
+    echo Execute command: $EXECUTE_COMMAND
+  fi
+
+  EXECUTE_COMMAND=(-c "${EXECUTE_COMMAND}")
+fi
+
+if [[ $EXECUTE_COMMAND_B64 ]]; then
+  EXECUTE_COMMAND=`echo $EXECUTE_COMMAND_B64 | base64 -d`
+  if [[ $XXH_VERBOSE == '1' || $XXH_VERBOSE == '2' ]]; then
+    echo Execute command base64: $EXECUTE_COMMAND_B64
+    echo Execute command: $EXECUTE_COMMAND
+  fi
+
+  EXECUTE_COMMAND=(-c "${EXECUTE_COMMAND}")
 fi
 
 EXECUTE_FILE=`[ $EXECUTE_FILE ] && echo -n "-- $EXECUTE_FILE" || echo -n ""`
@@ -64,4 +77,4 @@ fi
 export XXH_HOME=`realpath $CURRENT_DIR/../../../..`
 export XONSH_HISTORY_FILE=$XXH_HOME/.xonsh_history
 
-./xonsh --no-script-cache -i --rc xonshrc.xsh $EXECUTE_FILE
+./xonsh --no-script-cache -i --rc xonshrc.xsh $EXECUTE_FILE "${EXECUTE_COMMAND[@]}"
