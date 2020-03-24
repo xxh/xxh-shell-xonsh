@@ -14,7 +14,7 @@ cd ~/.xxh/xxh/plugins \
 ```
 Connect:
 ``` 
-xxh yourhost +s xonsh +if
+xxh yourhost +s xxh-shell-xonsh-appimage +if
 ```
 
 ## Using python, pip and [xontribs](https://xon.sh/xontribs.html)
