@@ -74,7 +74,7 @@ if [[ ! -f .entrypoint-check-done ]]; then
   echo $check_result > .entrypoint-check-done
 fi
 
-export XXH_HOME=`realpath $CURRENT_DIR/../../../..`
+export XXH_HOME=`dirname $CURRENT_DIR/../../../../p`
 export XONSH_HISTORY_FILE=$XXH_HOME/.xonsh_history
 
 ./xonsh --no-script-cache -i --rc xonshrc.xsh $EXECUTE_FILE "${EXECUTE_COMMAND[@]}"
