@@ -74,7 +74,7 @@ if [[ ! -f .entrypoint-check-done ]]; then
   echo $check_result > .entrypoint-check-done
 fi
 
-export XXH_HOME=`dirname $CURRENT_DIR/../../../../p`
+export XXH_HOME=`readlink -f $CURRENT_DIR/../../../..`
 export XONSH_HISTORY_FILE=$XXH_HOME/.xonsh_history
 export XDG_CONFIG_HOME=$XXH_HOME/.config
 
