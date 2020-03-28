@@ -11,7 +11,7 @@ do
   esac
 done
 
-url='https://github.com/xxh/linuxdeploy-plugin-python/releases/download/continuous/xonsh-master-x86_64.AppImage'
+url='https://github.com/xxh/xxh-appimage/releases/download/continuous/xonsh-master-x86_64.AppImage'
 appimage_name='xonsh'
 
 rm -rf $build_dir
