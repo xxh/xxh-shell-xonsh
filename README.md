@@ -12,7 +12,13 @@ xxh +I xxh-shell-xonsh-appimage+git+https://github.com/xxh/xxh-shell-xonsh-appim
 ```
 Connect:
 ``` 
-xxh yourhost +s xxh-shell-xonsh-appimage +if
+xxh yourhost +s xonsh-appimage +if
+```
+To avoid adding `+s` every time use xxh config in `~/.config/xxh/config.xxhc` (`$XDG_CONFIG_HOME`):
+```
+hosts:
+  ".*":                     # Regex for all hosts
+    +s: xonsh-appimage
 ```
 
 ## Using python, pip and [xontribs](https://xon.sh/xontribs.html)
