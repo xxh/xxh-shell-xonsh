@@ -1,6 +1,6 @@
 #!/bin/bash
 
-while getopts f:c:C:v:e:b: option
+while getopts f:c:C:v:e:b:H: option
 do
 case "${option}"
 in
@@ -10,6 +10,7 @@ C) EXECUTE_COMMAND_B64=${OPTARG};;
 v) VERBOSE=${OPTARG};;
 e) ENV+=("$OPTARG");;
 b) EBASH+=("$OPTARG");;
+H) HOMEPATH=${OPTARG};;
 esac
 done
 
@@ -77,5 +78,18 @@ fi
 export XXH_HOME=`readlink -f $CURRENT_DIR/../../../..`
 export XONSH_HISTORY_FILE=$XXH_HOME/.xonsh_history
 export XDG_CONFIG_HOME=$XXH_HOME/.config
+
+if [[ $HOMEPATH != '' ]]; then
+  homerealpath=`readlink -f $HOMEPATH`
+  if [[ -d $homerealpath ]]; then
+    export HOME=$homerealpath
+  else
+    echo "Home path not found: $homerealpath"
+    echo "Set HOME to $XXH_HOME"
+    export HOME=$XXH_HOME
+  fi
+else
+  export HOME=$XXH_HOME
+fi
 
 ./xonsh --no-script-cache -i --rc xonshrc.xsh $EXECUTE_FILE "${EXECUTE_COMMAND[@]}"

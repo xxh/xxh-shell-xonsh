@@ -8,7 +8,7 @@ $XXH_VERBOSE = $XXH_VERBOSE if 'XXH_VERBOSE' in ${...} else False
 $UPDATE_OS_ENVIRON=True
 $XXH_HOME = pf"{__file__}".absolute().parent.parent.parent.parent.parent
 
-$PIP_TARGET = $XXH_HOME / 'pip'
+$PIP_TARGET = $XXH_HOME / '.pip'
 $PIP_XONTRIB_TARGET = $PIP_TARGET / 'xontrib'
 if not $PIP_XONTRIB_TARGET.exists():
     mkdir -p @($PIP_XONTRIB_TARGET)
@@ -48,7 +48,7 @@ for e in ${...}:
             print(f'Execute {repr(code)}')
         exec(code)
 
-for plugin_path in sorted(($XXH_HOME / 'xxh/plugins').glob('*xonsh*')):
+for plugin_path in sorted(($XXH_HOME / '.xxh/plugins').glob('*xonsh*')):
     if (plugin_path / 'build/pluginrc.xsh').exists():
         plugin_path = plugin_path / 'build'
         cd @(plugin_path)
