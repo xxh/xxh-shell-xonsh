@@ -1,6 +1,6 @@
 #!/bin/bash
 
-while getopts f:c:C:v:e:b:H: option
+while getopts f:c:C:v:e:b:H:X: option
 do
 case "${option}"
 in
@@ -11,6 +11,7 @@ v) VERBOSE=${OPTARG};;
 e) ENV+=("$OPTARG");;
 b) EBASH+=("$OPTARG");;
 H) HOMEPATH=${OPTARG};;
+X) XDGPATH=${OPTARG};;
 esac
 done
 
@@ -91,7 +92,19 @@ else
   export HOME=$XXH_HOME
 fi
 
-export XDG_CONFIG_HOME=$HOME/.config
-export XDG_DATA_HOME=$HOME/.local/share
+if [[ $XDGPATH != '' ]]; then
+  xdgrealpath=`readlink -f $XDGPATH`
+  if [[ ! -d $xdgrealpath ]]; then
+    echo "XDG path not found: $xdgrealpath"
+    echo "Set XDG path to $XXH_HOME"
+    export XDGPATH=$XXH_HOME
+  fi
+else
+  export XDGPATH=$XXH_HOME
+fi
+
+export XDG_CONFIG_HOME=$XDGPATH/.config
+export XDG_DATA_HOME=$XDGPATH/.local/share
+export XDG_CACHE_HOME=$XDGPATH/.cache
 
 ./xonsh --no-script-cache -i --rc xonshrc.xsh $EXECUTE_FILE "${EXECUTE_COMMAND[@]}"
