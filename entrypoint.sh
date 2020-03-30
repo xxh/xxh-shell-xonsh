@@ -77,7 +77,6 @@ fi
 
 export XXH_HOME=`readlink -f $CURRENT_DIR/../../../..`
 export XONSH_HISTORY_FILE=$XXH_HOME/.xonsh_history
-export XDG_CONFIG_HOME=$XXH_HOME/.config
 
 if [[ $HOMEPATH != '' ]]; then
   homerealpath=`readlink -f $HOMEPATH`
@@ -91,5 +90,8 @@ if [[ $HOMEPATH != '' ]]; then
 else
   export HOME=$XXH_HOME
 fi
+
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_DATA_HOME=$HOME/.local/share
 
 ./xonsh --no-script-cache -i --rc xonshrc.xsh $EXECUTE_FILE "${EXECUTE_COMMAND[@]}"
