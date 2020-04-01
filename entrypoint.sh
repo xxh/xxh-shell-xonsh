@@ -1,5 +1,17 @@
 #!/bin/bash
 
+#
+# Support arguments (this recommend but not required):
+#   -f <file>               Execute file on host, print the result and exit
+#   -c <command>            [Not recommended to use] Execute command on host, print the result and exit
+#   -C <command in base64>  Execute command on host, print the result and exit
+#   -v <level>              Verbose mode: 1 - verbose, 2 - super verbose
+#   -e <NAME=B64> -e ...    Environement variables (B64 is base64 encoded string)
+#   -b <BASE64> -b ...      Base64 encoded bash command
+#   -H <HOME path>          HOME path. Will be $HOME on the host.
+#   -X <XDG path>           XDG_* path (https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html)
+#
+
 while getopts f:c:C:v:e:b:H:X: option
 do
 case "${option}"
