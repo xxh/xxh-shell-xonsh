@@ -19,9 +19,16 @@ sys.path.append(str($PIP_TARGET))
 sys.path.remove('') if '' in sys.path else None
 
 def _xxh_pip(args):
+    ''' https://github.com/pypa/packaging.python.org/issues/700
+    '''
     if args and 'install' in args and '-h' not in args and '--help' not in args:
-        safe_dirs = ['bin', 'xontrib'] # https://github.com/pypa/packaging.python.org/issues/700
+        safe_dirs = ['bin', 'xontrib']
+        pipinstall_home = $PIP_TARGET / 'pipinstall'
+        mkdir -p @(pipinstall_home)
+        ln -sf @(f'{$PYTHONHOME}/../../usr/bin/python') @(pipinstall_home / 'xonsh')
         try:
+            current_dir = $PWD
+            cd @(pipinstall_home)
             for sd in safe_dirs:
                 mkdir -p @($PIP_TARGET / sd)
                 mv @($PIP_TARGET / sd) @($PIP_TARGET / (sd + '-safe'))
@@ -33,6 +40,7 @@ def _xxh_pip(args):
                 rm -r @($PIP_TARGET / sd)
                 mv @($PIP_TARGET / (sd + '-safe')) @($PIP_TARGET / sd)
                 bash -c $(echo sed @(f"'s|#!{$PWD}/xonsh|#!/usr/bin/env python|'") -i @($PIP_TARGET / 'bin/*') "2> /dev/null" )
+            cd @(current_dir)
     else:
         python -m pip @(args)
 
