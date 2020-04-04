@@ -23,6 +23,7 @@ def _xxh_pip(args):
         safe_dirs = ['bin', 'xontrib'] # https://github.com/pypa/packaging.python.org/issues/700
         try:
             for sd in safe_dirs:
+                mkdir -p @($PIP_TARGET / sd)
                 mv @($PIP_TARGET / sd) @($PIP_TARGET / (sd + '-safe'))
             pip @(args)
         finally:
