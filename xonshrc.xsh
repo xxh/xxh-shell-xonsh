@@ -17,23 +17,23 @@ $PYTHONPATH = $PIP_TARGET
 $PATH = [$PIP_TARGET/'bin', f'{$PYTHONHOME}/bin', f'{$PYTHONHOME}/../../usr/bin' ] + $PATH
 sys.path.append(str($PIP_TARGET))
 sys.path.remove('') if '' in sys.path else None
-aliases['pip'] = ['python','-m','pip']
 
-def _xxh_pip(args): # https://github.com/xonsh/xonsh/issues/3463
+def _xxh_pip(args):
     if args and 'install' in args and '-h' not in args and '--help' not in args:
-        print('\033[0;33mRun xpip in xontrib safe mode\033[0m')
+        safe_dirs = ['bin', 'xontrib'] # https://github.com/pypa/packaging.python.org/issues/700
         try:
-            pip_xontrib_tmp = $PIP_XONTRIB_TARGET.parent / 'xontrib-safe'
-            mv @($PIP_XONTRIB_TARGET) @(pip_xontrib_tmp)
+            for sd in safe_dirs:
+                mv @($PIP_TARGET / sd) @($PIP_TARGET / (sd + '-safe'))
             pip @(args)
         finally:
-            mkdir -p @($PIP_XONTRIB_TARGET)
-            if list(pip_xontrib_tmp.glob('*')):
-                bash -c $(echo mv @(pip_xontrib_tmp / '*') @($PIP_XONTRIB_TARGET))
-            rm -r @(pip_xontrib_tmp)
+            for sd in safe_dirs:
+                mkdir -p @($PIP_TARGET / sd)
+                bash -c $(echo mv @($PIP_TARGET / (sd + '-safe') / '*') @($PIP_TARGET / sd))
+            rm -r @($PIP_TARGET / (sd + '-safe'))
     else:
-        pip @(args)
+        python -m pip @(args)
 
+aliases['pip'] = _xxh_pip
 aliases['xpip'] = _xxh_pip
 del _xxh_pip
 
