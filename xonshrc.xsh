@@ -32,6 +32,7 @@ def _xxh_pip(args):
                 bash -c $(echo mv @($PIP_TARGET / sd / '*') @($PIP_TARGET / (sd + '-safe') ) "2> /dev/null")
                 rm -r @($PIP_TARGET / sd)
                 mv @($PIP_TARGET / (sd + '-safe')) @($PIP_TARGET / sd)
+                bash -c $(echo sed @(f"'s|#!{$PWD}/xonsh|#!/usr/bin/env python|'") -i @($PIP_TARGET / 'bin/*') "2> /dev/null" )
     else:
         python -m pip @(args)
 
