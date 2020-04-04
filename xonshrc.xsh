@@ -25,12 +25,13 @@ def _xxh_pip(args):
             for sd in safe_dirs:
                 mkdir -p @($PIP_TARGET / sd)
                 mv @($PIP_TARGET / sd) @($PIP_TARGET / (sd + '-safe'))
+                mkdir -p @($PIP_TARGET / sd)
             pip @(args)
         finally:
             for sd in safe_dirs:
-                mkdir -p @($PIP_TARGET / sd)
-                bash -c $(echo mv @($PIP_TARGET / (sd + '-safe') / '*') @($PIP_TARGET / sd))
-            rm -r @($PIP_TARGET / (sd + '-safe'))
+                bash -c $(echo mv @($PIP_TARGET / sd / '*') @($PIP_TARGET / (sd + '-safe') ) "2> /dev/null")
+                rm -r @($PIP_TARGET / sd)
+                mv @($PIP_TARGET / (sd + '-safe')) @($PIP_TARGET / sd)
     else:
         python -m pip @(args)
 
