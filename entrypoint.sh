@@ -134,4 +134,4 @@ for pluginrc_file in $(find $CURRENT_DIR/../../../plugins/xxh-plugin-*/build -ty
 done
 
 cd $HOME
-$CURRENT_DIR/xonsh --no-script-cache -i --rc xonshrc.xsh $EXECUTE_FILE "${EXECUTE_COMMAND[@]}"
+$CURRENT_DIR/xonsh --no-script-cache -i --rc $CURRENT_DIR/xonshrc.xsh $EXECUTE_FILE "${EXECUTE_COMMAND[@]}"
