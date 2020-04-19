@@ -1,4 +1,4 @@
-import sys, argparse
+import sys
 from base64 import b64decode
 
 del $LS_COLORS # https://github.com/xonsh/xonsh/issues/3055
@@ -8,45 +8,13 @@ $XXH_VERBOSE = $XXH_VERBOSE if 'XXH_VERBOSE' in ${...} else False
 $UPDATE_OS_ENVIRON=True
 $XXH_HOME = pf"{__file__}".absolute().parent.parent.parent.parent.parent
 
-$PIP_TARGET = $XXH_HOME / '.pip'
-$PIP_XONTRIB_TARGET = $PIP_TARGET / 'xontrib'
-if not $PIP_XONTRIB_TARGET.exists():
-    mkdir -p @($PIP_XONTRIB_TARGET)
+$PIPHOME = pf'{$XDG_CONFIG_HOME}'.parent / '.local'
+$PYTHONUSERBASE = $PIPHOME
+$PYTHONPATH = $PIPHOME / 'lib/python3.8/site-packages'
+$PATH = [f'{$PIPHOME}/bin', f'{$APPDIR}/usr/bin'] + $PATH
 
-$PYTHONPATH = $PIP_TARGET
-$PATH = [$PIP_TARGET/'bin', f'{$PYTHONHOME}/bin', f'{$PYTHONHOME}/../../usr/bin' ] + $PATH
-sys.path.append(str($PIP_TARGET))
-sys.path.remove('') if '' in sys.path else None
-
-def _xxh_pip(args):
-    ''' https://github.com/pypa/packaging.python.org/issues/700
-    '''
-    if args and 'install' in args and '-h' not in args and '--help' not in args:
-        safe_dirs = ['bin', 'xontrib']
-        pipinstall_home = $PIP_TARGET / 'pipinstall'
-        mkdir -p @(pipinstall_home)
-        ln -sf @(f'{$PYTHONHOME}/../../usr/bin/python') @(pipinstall_home / 'xonsh')
-        try:
-            current_dir = $PWD
-            cd @(pipinstall_home)
-            for sd in safe_dirs:
-                mkdir -p @($PIP_TARGET / sd)
-                mv @($PIP_TARGET / sd) @($PIP_TARGET / (sd + '-safe'))
-                mkdir -p @($PIP_TARGET / sd)
-            python -m pip @(args)
-        finally:
-            for sd in safe_dirs:
-                bash -c $(echo mv @($PIP_TARGET / sd / '*') @($PIP_TARGET / (sd + '-safe') ) "2> /dev/null")
-                rm -r @($PIP_TARGET / sd)
-                mv @($PIP_TARGET / (sd + '-safe')) @($PIP_TARGET / sd)
-                bash -c $(echo sed @(f"'s|#!{$PWD}/xonsh|#!/usr/bin/env python|'") -i @($PIP_TARGET / 'bin/*') "2> /dev/null" )
-            cd @(current_dir)
-    else:
-        python -m pip @(args)
-
-aliases['pip'] = _xxh_pip
-aliases['xpip'] = _xxh_pip
-del _xxh_pip
+aliases['pip'] = 'python -m pip'
+aliases['xpip'] = 'python -m pip'
 
 if 'APPDIR' in ${...}:
     aliases['xonsh'] = [$APPDIR+'/AppRun']
@@ -68,4 +36,4 @@ for plugin_path in sorted(($XXH_HOME / '.xxh/plugins').glob('*xonsh*')):
         __import__('pluginrc')
         del sys.modules['pluginrc']
         sys.path = sys_path
-cd
+cd $HOME

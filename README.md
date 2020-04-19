@@ -23,9 +23,20 @@ hosts:
 
 ## Using python, pip and [xontribs](https://xon.sh/xontribs.html)
 
-The `xxh-shell-xonsh-appimage` is using pip and python from `xonsh.AppImage` by default. You can update pip (`pip install --upgrade pip`) and install packages ordinally: `pip install --upgrade pandas`. The packages will appear in host xxh home `~/.xxh/pip` by default.
+The `xonsh.AppImage` has `python` and `pip` by default. You can update pip and install packages and [xontribs](https://xon.sh/xontribs.html) ordinarily: 
+```
+myhost> pip install -U pip
+myhost> pip install pandas
+myhost> xpip install xontrib-autojump
+``` 
 
-To install [xontribs](https://xon.sh/xontribs.html) in xxh session use `xpip install <package>`. Never use `pip` to install xontribs ([details](https://github.com/xonsh/xonsh/issues/3463)).
+Packages location comply with [hermetic principle](https://github.com/xxh/xxh/wiki#the-ideas-behind-xxh):
+
+| xxh command | pip packages home | user home |
+| ------- | ---------- | --------- |
+| `xxh myhost` | `/home/user/.xxh/.local` | `/home/user/.xxh` |
+| `xxh myhost +hhh '~'` | `/home/user/.xxh/.local` | `/home/user` | 
+| `xxh myhost +hhh '~' +hhx '~'` | `/home/user/.local` | `/home/user` |
 
 ## Plugins
 
