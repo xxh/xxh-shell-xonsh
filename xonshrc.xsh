@@ -1,4 +1,4 @@
-import sys
+import sys, argparse
 from base64 import b64decode
 
 del $LS_COLORS # https://github.com/xonsh/xonsh/issues/3055
@@ -31,8 +31,19 @@ $PYTHONUSERBASE = $PIPHOME
 $PYTHONPATH = $PIPHOME / 'lib/python3.8/site-packages'
 $PATH = [f'{$PIPHOME}/bin'] + $PATH
 
-aliases['pip'] = 'python -m pip'
-aliases['xpip'] = 'python -m pip'
+$PIP_XONTRIB_TARGET = pf'{$PYTHONPATH}' / 'xontrib'
+if not $PIP_XONTRIB_TARGET.exists():
+    mkdir -p @($PIP_XONTRIB_TARGET)
+
+def _xxh_pip(args):
+    if args and 'install' in args and '-h' not in args and '--help' not in args:
+        python -m pip @(args) --user
+    else:
+        python -m pip @(args)
+
+aliases['pip'] = _xxh_pip
+aliases['xpip'] = _xxh_pip
+del _xxh_pip
 
 prefix_exe = 'XXH_SHELL_XONSH_APPIMAGE_EXE'
 for e in ${...}:
