@@ -32,17 +32,24 @@ $PYTHONPACKAGES = $PIPHOME / 'lib/python3.8/site-packages'
 $PIP_XONTRIB_TARGET = $PYTHONPACKAGES / 'xontrib'
 $PYTHONPATH = [$PYTHONPACKAGES]
 $PATH = [f'{$PIPHOME}/bin'] + $PATH
-sys.path.append(str($PYTHONPACKAGES)) # Fix: https://github.com/xonsh/xonsh/issues/3461
-sys.path.remove('') if '' in sys.path else None
 
-if not $PIP_XONTRIB_TARGET.exists(): # Fix: https://github.com/xonsh/xonsh/issues/3461
+# Fix: https://github.com/xonsh/xonsh/issues/3461
+sys.path.append(str($PYTHONPACKAGES))
+if not $PIP_XONTRIB_TARGET.exists():
     mkdir -p @($PIP_XONTRIB_TARGET)
 
+sys.path.remove('') if '' in sys.path else None
+
 def _xxh_pip(args):
-    if args and 'install' in args and '-h' not in args and '--help' not in args:
-        python -m pip @(args) --user
+    if 'APPDIR' in ${...}:
+        py = $APPDIR + '/opt/python3.8/bin/python3.8'
     else:
-        python -m pip @(args)
+        py = 'python'
+
+    if args and 'install' in args and '-h' not in args and '--help' not in args:
+        @(py) -m pip @(args) --user
+    else:
+        @(py) -m pip @(args)
 
 aliases['pip'] = _xxh_pip
 aliases['xpip'] = _xxh_pip
