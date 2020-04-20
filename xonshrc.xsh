@@ -3,21 +3,36 @@ from base64 import b64decode
 
 del $LS_COLORS # https://github.com/xonsh/xonsh/issues/3055
 
-$XXH_VERBOSE = $XXH_VERBOSE if 'XXH_VERBOSE' in ${...} else False
+if 'XXH_VERBOSE' in ${...}:
+    $XXH_VERBOSE = int($XXH_VERBOSE)
+else:
+    $XXH_VERBOSE = 0
+
+if $XXH_VERBOSE in [1,2]:
+    $XONSH_SHOW_TRACEBACK = True
 
 $UPDATE_OS_ENVIRON=True
-$XXH_HOME = pf"{__file__}".absolute().parent.parent.parent.parent.parent
+$XXH_HOME = pf"{$XXH_HOME}"
+CDIR = pf"{__file__}".absolute().parent
+
+if 'APPDIR' in ${...}:
+    $PATH = [f'{$APPDIR}/usr/bin'] + $PATH
+    aliases['xonsh'] = [$APPDIR + '/AppRun']
+else:
+    extracted_appimage = fp'{CDIR}/xonsh-squashfs'
+    if extracted_appimage.exists():
+        $PATH = [f'{CDIR}/xonsh-squashfs/usr/bin'] + $PATH
+        aliases['xonsh'] = [f'{CDIR}/xonsh-squashfs/AppRun']
+    else:
+        print('Extracted xonsh AppImage not found!', file=sys.stderr)
 
 $PIPHOME = pf'{$XDG_CONFIG_HOME}'.parent / '.local'
 $PYTHONUSERBASE = $PIPHOME
 $PYTHONPATH = $PIPHOME / 'lib/python3.8/site-packages'
-$PATH = [f'{$PIPHOME}/bin', f'{$APPDIR}/usr/bin'] + $PATH
+$PATH = [f'{$PIPHOME}/bin'] + $PATH
 
 aliases['pip'] = 'python -m pip'
 aliases['xpip'] = 'python -m pip'
-
-if 'APPDIR' in ${...}:
-    aliases['xonsh'] = [$APPDIR+'/AppRun']
 
 prefix_exe = 'XXH_SHELL_XONSH_APPIMAGE_EXE'
 for e in ${...}:
