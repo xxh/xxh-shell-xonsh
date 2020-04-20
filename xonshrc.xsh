@@ -31,7 +31,7 @@ $PYTHONUSERBASE = $PIPHOME
 $PYTHONPATH = $PIPHOME / 'lib/python3.8/site-packages'
 $PATH = [f'{$PIPHOME}/bin'] + $PATH
 
-$PIP_XONTRIB_TARGET = pf'{$PYTHONPATH}' / 'xontrib'
+$PIP_XONTRIB_TARGET = pf'{$PYTHONPATH[0]}' / 'xontrib'
 if not $PIP_XONTRIB_TARGET.exists():
     mkdir -p @($PIP_XONTRIB_TARGET)
 
