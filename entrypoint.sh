@@ -73,24 +73,6 @@ fi
 EXECUTE_FILE=`[ $EXECUTE_FILE ] && echo -n "-- $EXECUTE_FILE" || echo -n ""`
 
 CURRENT_DIR="$(cd "$(dirname "$0")" && pwd)"
-cd $CURRENT_DIR
-
-# Check FUSE support
-check_result=`./xonsh --no-script-cache -i --rc xonshrc.xsh -- $CURRENT_DIR/../../../package/settings.py 2>&1`
-if [[ ! -f .entrypoint-check-done ]]; then
-  if [[ $check_result == *"FUSE"* ]]; then
-    if [[ $XXH_VERBOSE == '1' || $XXH_VERBOSE == '2' ]]; then
-      echo "Extract AppImage" 1>&2
-    fi
-
-    ./xonsh --appimage-extract > /dev/null
-    mv squashfs-root xonsh-squashfs
-    mv xonsh xonsh-disabled
-    sed 's|#!.*|#!'`pwd`'/xonsh-squashfs/usr/bin/python|' -i ./xonsh-squashfs/opt/python3.8/bin/xonsh
-    ln -s ./xonsh-squashfs/opt/python3.8/bin/xonsh xonsh
-  fi
-  echo $check_result > .entrypoint-check-done
-fi
 
 export XXH_HOME=`readlink -f $CURRENT_DIR/../../../..`
 export XONSH_HISTORY_FILE=$XXH_HOME/.xonsh_history
@@ -122,6 +104,24 @@ fi
 export XDG_CONFIG_HOME=$XDGPATH/.config
 export XDG_DATA_HOME=$XDGPATH/.local/share
 export XDG_CACHE_HOME=$XDGPATH/.cache
+
+# Check FUSE support
+cd $CURRENT_DIR
+check_result=`./xonsh --no-script-cache -i --rc xonshrc.xsh -- $CURRENT_DIR/../../../package/settings.py 2>&1`
+if [[ ! -f .entrypoint-check-done ]]; then
+  if [[ $check_result == *"FUSE"* ]]; then
+    if [[ $XXH_VERBOSE == '1' || $XXH_VERBOSE == '2' ]]; then
+      echo "Extract AppImage" 1>&2
+    fi
+
+    ./xonsh --appimage-extract > /dev/null
+    mv squashfs-root xonsh-squashfs
+    mv xonsh xonsh-disabled
+    sed 's|#!.*|#!'`pwd`'/xonsh-squashfs/usr/bin/python|' -i ./xonsh-squashfs/opt/python3.8/bin/xonsh
+    ln -s ./xonsh-squashfs/opt/python3.8/bin/xonsh xonsh
+  fi
+  echo $check_result > .entrypoint-check-done
+fi
 
 for pluginrc_file in $(find $CURRENT_DIR/../../../plugins/xxh-plugin-*/build -type f -name '*prerun.sh' -printf '%f\t%p\n' 2>/dev/null | sort -k1 | cut -f2); do
   if [[ -f $pluginrc_file ]]; then
