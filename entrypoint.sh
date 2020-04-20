@@ -128,7 +128,6 @@ for pluginrc_file in $(find $CURRENT_DIR/../../../plugins/xxh-plugin-*/build -ty
     if [[ $XXH_VERBOSE == '1' || $XXH_VERBOSE == '2' ]]; then
       echo Load plugin $pluginrc_file
     fi
-    #cd $(dirname $pluginrc_file)
     source $pluginrc_file
   fi
 done
