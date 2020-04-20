@@ -28,11 +28,14 @@ else:
 
 $PIPHOME = pf'{$XDG_CONFIG_HOME}'.parent / '.local'
 $PYTHONUSERBASE = $PIPHOME
-$PYTHONPATH = $PIPHOME / 'lib/python3.8/site-packages'
+$PYTHONPACKAGES = $PIPHOME / 'lib/python3.8/site-packages'
+$PIP_XONTRIB_TARGET = $PYTHONPACKAGES / 'xontrib'
+$PYTHONPATH = [$PYTHONPACKAGES]
 $PATH = [f'{$PIPHOME}/bin'] + $PATH
+sys.path.append(str($PYTHONPACKAGES)) # Fix: https://github.com/xonsh/xonsh/issues/3461
+sys.path.remove('') if '' in sys.path else None
 
-$PIP_XONTRIB_TARGET = pf'{$PYTHONPATH[0]}' / 'xontrib'
-if not $PIP_XONTRIB_TARGET.exists():
+if not $PIP_XONTRIB_TARGET.exists(): # Fix: https://github.com/xonsh/xonsh/issues/3461
     mkdir -p @($PIP_XONTRIB_TARGET)
 
 def _xxh_pip(args):
