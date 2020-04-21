@@ -108,18 +108,12 @@ export XDG_CACHE_HOME=$XDGPATH/.cache
 # Check FUSE support
 cd $CURRENT_DIR
 if [[ ! -f .entrypoint-check-done ]]; then
-  check_result=`./xonsh -V 2>&1`
-  if [[ $check_result != *"xonsh/"* ]]; then
-    if [[ $XXH_VERBOSE == '1' || $XXH_VERBOSE == '2' ]]; then
-      echo "Extract AppImage" 1>&2
-    fi
-
-    ./xonsh --appimage-extract > /dev/null
-    mv squashfs-root xonsh-squashfs
-    mv xonsh xonsh-disabled
-    sed 's|#!.*|#!'`pwd`'/xonsh-squashfs/usr/bin/python|' -i ./xonsh-squashfs/opt/python3.8/bin/xonsh
-    ln -s ./xonsh-squashfs/opt/python3.8/bin/xonsh xonsh
+  if [[ $XXH_VERBOSE == '1' || $XXH_VERBOSE == '2' ]]; then
+    echo "Extract AppImage" 1>&2
   fi
+  ./xonsh --appimage-extract > /dev/null
+  mv squashfs-root xonsh-squashfs && mv xonsh xonsh-disabled
+  ln -s ./xonsh-squashfs/usr/bin/xonsh xonsh
   echo $check_result > .entrypoint-check-done
 fi
 
@@ -133,4 +127,4 @@ for pluginrc_file in $(find $CURRENT_DIR/../../../plugins/xxh-plugin-*/build -ty
 done
 
 cd $HOME
-$CURRENT_DIR/xonsh --no-script-cache -i --rc $CURRENT_DIR/xonshrc.xsh $EXECUTE_FILE "${EXECUTE_COMMAND[@]}"
+$CURRENT_DIR/xonsh -i --rc $CURRENT_DIR/xonshrc.xsh $EXECUTE_FILE "${EXECUTE_COMMAND[@]}"
