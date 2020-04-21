@@ -107,8 +107,8 @@ export XDG_CACHE_HOME=$XDGPATH/.cache
 
 # Check FUSE support
 cd $CURRENT_DIR
-check_result=`./xonsh -V 2>&1`
 if [[ ! -f .entrypoint-check-done ]]; then
+  check_result=`./xonsh -V 2>&1`
   if [[ $check_result != *"xonsh/"* ]]; then
     if [[ $XXH_VERBOSE == '1' || $XXH_VERBOSE == '2' ]]; then
       echo "Extract AppImage" 1>&2
