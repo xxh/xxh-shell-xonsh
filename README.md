@@ -4,21 +4,21 @@ Python-powered [xonsh shell](https://xon.sh) entrypoint for [xxh](https://github
 
 Install from xxh repo:
 ```
-xxh +I xxh-shell-xonsh-appimage
+xxh +I xxh-shell-xonsh
 ```
 Install from any repo:
 ```
-xxh +I xxh-shell-xonsh-appimage+git+https://github.com/xxh/xxh-shell-xonsh-appimage
+xxh +I xxh-shell-xonsh+git+https://github.com/xxh/xxh-shell-xonsh
 ```
 Connect:
 ``` 
-xxh yourhost +s xonsh-appimage +if
+xxh yourhost +s xonsh +if
 ```
 To avoid adding `+s` every time use xxh config in `~/.config/xxh/config.xxhc` (`$XDG_CONFIG_HOME`):
 ```
 hosts:
   ".*":                     # Regex for all hosts
-    +s: xonsh-appimage
+    +s: xonsh
 ```
 
 ## Using python, pip and [xontribs](https://xon.sh/xontribs.html)
