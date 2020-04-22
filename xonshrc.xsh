@@ -13,6 +13,7 @@ if $XXH_VERBOSE in [1,2]:
 
 if $XXH_VERBOSE in [2]:
     $XONSH_DEBUG = 1
+    $XONSH_TRACE_SUBPROC = True
 
 $UPDATE_OS_ENVIRON=True
 $XXH_HOME = pf"{$XXH_HOME}"
