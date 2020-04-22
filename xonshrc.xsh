@@ -11,6 +11,9 @@ else:
 if $XXH_VERBOSE in [1,2]:
     $XONSH_SHOW_TRACEBACK = True
 
+if $XXH_VERBOSE in [2]:
+    $XONSH_DEBUG = 1
+
 $UPDATE_OS_ENVIRON=True
 $XXH_HOME = pf"{$XXH_HOME}"
 CDIR = pf"{__file__}".absolute().parent
