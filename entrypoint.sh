@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -i
 
 #
 # Support arguments (this recommend but not required):
