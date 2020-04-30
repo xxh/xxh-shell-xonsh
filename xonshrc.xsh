@@ -67,13 +67,8 @@ for e in ${...}:
             print(f'Execute {repr(code)}')
         exec(code)
 
-for plugin_path in sorted(($XXH_HOME / '.xxh/plugins').glob('*xonsh*')):
-    if (plugin_path / 'build/pluginrc.xsh').exists():
-        plugin_path = plugin_path / 'build'
-        cd @(plugin_path)
-        sys_path = sys.path
-        sys.path += [str(plugin_path)]
-        __import__('pluginrc')
-        del sys.modules['pluginrc']
-        sys.path = sys_path
+for xsh in sorted(($XXH_HOME / '.xxh/plugins').glob('**/build/*pluginrc.xsh')) + [$XXH_HOME / '.xonshrc']:
+    if xsh.exists():
+        source @(xsh)
+
 cd $HOME
