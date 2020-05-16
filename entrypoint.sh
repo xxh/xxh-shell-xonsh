@@ -74,11 +74,11 @@ EXECUTE_FILE=`[ $EXECUTE_FILE ] && echo -n "-- $EXECUTE_FILE" || echo -n ""`
 
 CURRENT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
-export XXH_HOME=`readlink -f $CURRENT_DIR/../../../..`
+export XXH_HOME=$CURRENT_DIR/../../../..
 export XONSH_HISTORY_FILE=$XXH_HOME/.xonsh_history
 
 if [[ $HOMEPATH != '' ]]; then
-  homerealpath=`readlink -f $HOMEPATH`
+  homerealpath=$HOMEPATH
   if [[ -d $homerealpath ]]; then
     export HOME=$homerealpath
   else
@@ -91,7 +91,7 @@ else
 fi
 
 if [[ $XDGPATH != '' ]]; then
-  xdgrealpath=`readlink -f $XDGPATH`
+  xdgrealpath=$XDGPATH
   if [[ ! -d $xdgrealpath ]]; then
     echo "XDG path not found: $xdgrealpath"
     echo "Set XDG path to $XXH_HOME"
