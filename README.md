@@ -1,4 +1,10 @@
-Python-powered [xonsh shell](https://xon.sh) entrypoint for [xxh](https://github.com/xxh/xxh).
+<p align="center">  
+Python-powered <a href="https://xon.sh">xonsh shell</a> entrypoint for <a href="https://github.com/xxh/xxh">xxh</a>.
+</p> 
+
+<p align="center">  
+If you like the idea of xxh click ⭐ on the repo and stay tuned.
+</p>
 
 ## Install
 
