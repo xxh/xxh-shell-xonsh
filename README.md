@@ -58,6 +58,10 @@ Add environment variables to `env` file and bring them to the host using `source
 source xxh.xsh myhost
 ```
   
+## Alpine Linux  
+  
+* [How to run xonsh AppImage on Alpine?](https://github.com/xonsh/xonsh/discussions/4158#discussioncomment-462032)
+  
 ## Thanks
 * @probonopd for https://github.com/AppImage
 * @niess for https://github.com/niess/linuxdeploy-plugin-python/ 
