@@ -1,5 +1,5 @@
 <p align="center">  
-Python-powered <a href="https://xon.sh">xonsh shell</a> entrypoint for <a href="https://github.com/xxh/xxh">xxh</a>.
+The <a href="https://xon.sh">xonsh shell</a> entrypoint for <a href="https://github.com/xxh/xxh">xxh</a>. Use xonsh wherever you go through the SSH without installation on the host. 
 </p> 
 
 <p align="center">  
