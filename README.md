@@ -9,14 +9,11 @@ If you like the idea of xxh click ⭐ on the repo and stay tuned.
 ## Install
 
 Install from xxh repo:
-```
+```bash
 xxh +I xxh-shell-xonsh
+# or from repo: xxh +I xxh-shell-xonsh+git+https://github.com/xxh/xxh-shell-xonsh
 ```
-Install from any repo:
-```
-xxh +I xxh-shell-xonsh+git+https://github.com/xxh/xxh-shell-xonsh
-```
-Connect:
+## Connect
 ``` 
 xxh yourhost +s xonsh +if
 ```
