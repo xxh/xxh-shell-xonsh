@@ -3,7 +3,7 @@ The <a href="https://xon.sh">xonsh shell</a> entrypoint for <a href="https://git
 </p> 
 
 <p align="center">  
-If you like the idea of xxh click ⭐ on the repo and stay tuned.
+If you like the idea click ⭐ on the repo and <a href="https://twitter.com/intent/tweet?text=Use%20the%20xonsh%20shell%20wherever%20you%20go%20through%20the%20SSH%20without%20installation%20on%20the%20host.&url=https://github.com/xxh/xxh-shell-xonsh" target="_blank">tweet</a>.
 </p>
 
 ## Install
