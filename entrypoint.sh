@@ -106,6 +106,9 @@ export XAUTHORITY=/home/$USER/.Xauthority
 export XDG_CONFIG_HOME=$XDGPATH/.config
 export XDG_DATA_HOME=$XDGPATH/.local/share
 export XDG_CACHE_HOME=$XDGPATH/.cache
+export TMPDIR=$XDG_CACHE_HOME/tmp
+export TEMP=$TMPDIR
+mkdir -p $TMPDIR
 
 # Check FUSE support
 cd $CURRENT_DIR
