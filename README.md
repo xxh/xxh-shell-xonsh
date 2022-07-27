@@ -26,7 +26,7 @@ hosts:
 
 ## Using python, pip and [xontribs](https://xon.sh/xontribs.html)
 
-The `xonsh.AppImage` has `python` and `pip` by default. You can update pip and install packages and [xontribs](https://xon.sh/xontribs.html) ordinarily: 
+The `xonsh.AppImage` has `python` and `pip` by default. You can update pip and install packages and [xontribs](https://github.com/topics/xontrib) ordinarily: 
 ```
 myhost> pip install -U pip
 myhost> pip install pandas
