@@ -30,7 +30,7 @@ The `xonsh.AppImage` has `python` and `pip` by default. You can update pip and i
 ```
 myhost> pip install -U pip
 myhost> pip install pandas
-myhost> xpip install xontrib-autojump
+myhost> xpip install xontrib-prompt-bar
 ``` 
 
 Packages location comply with [hermetic principle](https://github.com/xxh/xxh/wiki#the-ideas-behind-xxh):
