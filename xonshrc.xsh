@@ -32,7 +32,7 @@ else:
 
 $PIPHOME = pf'{$XDG_CONFIG_HOME}'.parent / '.local'
 $PYTHONUSERBASE = $PIPHOME
-$PYTHONPACKAGES = $PIPHOME / 'lib/python3.8/site-packages'
+$PYTHONPACKAGES = $PIPHOME / 'lib/python3.10/site-packages'
 $PIP_XONTRIB_TARGET = $PYTHONPACKAGES / 'xontrib'
 $PYTHONPATH = [$PYTHONPACKAGES]
 $PATH = [f'{$PIPHOME}/bin'] + $PATH
@@ -46,7 +46,7 @@ sys.path.remove('') if '' in sys.path else None
 
 def _xxh_pip(args):
     if 'APPDIR' in ${...}:
-        py = $APPDIR + '/opt/python3.8/bin/python3.8'
+        py = $APPDIR + '/opt/python3.10/bin/python3.10'
     else:
         py = 'python'
 
