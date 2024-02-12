@@ -3,18 +3,10 @@ from base64 import b64decode
 
 del $LS_COLORS # https://github.com/xonsh/xonsh/issues/3055
 
-if 'XXH_VERBOSE' in ${...}:
-    $XXH_VERBOSE = int($XXH_VERBOSE)
-else:
-    $XXH_VERBOSE = 0
-
-if $XXH_VERBOSE in [1,2]:
-    $XONSH_SHOW_TRACEBACK = True
-
-if $XXH_VERBOSE in [2]:
-    $XONSH_DEBUG = 1
-    $XONSH_TRACE_SUBPROC = True
-
+$XXH_VERBOSE = int(__xonsh__.env.get('XXH_VERBOSE', 0))
+$XONSH_SHOW_TRACEBACK = $XXH_VERBOSE in [1,2]
+$XONSH_DEBUG = int($XXH_VERBOSE in [2])
+$XONSH_TRACE_SUBPROC = $XXH_VERBOSE in [2]
 $UPDATE_OS_ENVIRON=True
 $XXH_HOME = pf"{$XXH_HOME}"
 CDIR = pf"{__file__}".absolute().parent
@@ -44,20 +36,14 @@ if not $PIP_XONTRIB_TARGET.exists():
 
 sys.path.remove('') if '' in sys.path else None
 
+# Maybe this is not neede because https://github.com/xonsh/xonsh/pull/4922
+@aliases.register("pip-appimage")
 def _xxh_pip(args):
-    if 'APPDIR' in ${...}:
-        py = $APPDIR + '/opt/python3.11/bin/python3.11'
-    else:
-        py = 'python'
-
+    py = $APPDIR + '/opt/python3.11/bin/python3.11' if 'APPDIR' in ${...} else 'python'
     if args and 'install' in args and '-h' not in args and '--help' not in args:
         @(py) -m pip @(args) --user
     else:
         @(py) -m pip @(args)
-
-aliases['pip'] = _xxh_pip
-aliases['xpip'] = _xxh_pip
-del _xxh_pip
 
 prefix_exe = 'XXH_SHELL_XONSH_APPIMAGE_EXE'
 for e in ${...}:
