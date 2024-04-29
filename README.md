@@ -41,7 +41,7 @@ Packages location comply with [hermetic principle](https://github.com/xxh/xxh/wi
 | `xxh myhost +hhh '~'` | `/home/user/.xxh/.local` | `/home/user` | 
 | `xxh myhost +hhh '~' +hhx '~'` | `/home/user/.local` | `/home/user` |
 
-Note! That packages will be installed in user directory by default i.e. `~/.local`. If you're using package manager (e.g. `mamba`, `conda`) set `$PYTHONNOUSERSITE=1` after virtual environment activation.
+Note! That packages will be installed in user directory by default i.e. `~/.local`. If you're using package manager (e.g. `mamba`, `conda`) set `$PYTHONNOUSERSITE=1` ([doc](https://docs.python.org/3/using/cmdline.html#envvar-PYTHONNOUSERSITE)) after virtual environment activation.
 
 
 ## Plugins
