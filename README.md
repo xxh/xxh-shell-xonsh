@@ -32,7 +32,6 @@ myhost> pip install -U pip
 myhost> pip install pandas
 myhost> xpip install xontrib-prompt-bar
 ```
-Note! That packages will be installed in user directory by default i.e. `~/.local`. If you're using package manager (e.g. `mamba`, `conda`) set `$PYTHONNOUSERSITE=1` after virtual environment activation.
 
 Packages location comply with [hermetic principle](https://github.com/xxh/xxh/wiki#the-ideas-behind-xxh):
 
@@ -41,6 +40,9 @@ Packages location comply with [hermetic principle](https://github.com/xxh/xxh/wi
 | `xxh myhost` | `/home/user/.xxh/.local` | `/home/user/.xxh` |
 | `xxh myhost +hhh '~'` | `/home/user/.xxh/.local` | `/home/user` | 
 | `xxh myhost +hhh '~' +hhx '~'` | `/home/user/.local` | `/home/user` |
+
+Note! That packages will be installed in user directory by default i.e. `~/.local`. If you're using package manager (e.g. `mamba`, `conda`) set `$PYTHONNOUSERSITE=1` after virtual environment activation.
+
 
 ## Plugins
 
