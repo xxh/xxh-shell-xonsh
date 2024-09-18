@@ -14,11 +14,11 @@ xxh +I xxh-shell-xonsh
 # or from repo: xxh +I xxh-shell-xonsh+git+https://github.com/xxh/xxh-shell-xonsh
 ```
 ## Connect
-``` 
+```xsh
 xxh yourhost +s xonsh +if
 ```
 To avoid adding `+s` every time use xxh config in `~/.config/xxh/config.xxhc` (`$XDG_CONFIG_HOME`):
-```
+```yaml
 hosts:
   ".*":                     # Regex for all hosts
     +s: xonsh
