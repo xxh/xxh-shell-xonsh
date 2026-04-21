@@ -13,7 +13,7 @@ do
   esac
 done
 
-url='https://github.com/xonsh/xonsh/releases/download/0.22.8/xonsh-x86_64.AppImage'
+url='https://github.com/xonsh/xonsh/releases/download/0.23.0/xonsh-x86_64.AppImage'
 appimage_name='xonsh'
 
 rm -rf $build_dir
